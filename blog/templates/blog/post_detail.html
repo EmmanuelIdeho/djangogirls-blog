@@ -14,9 +14,10 @@
                 {{ post.published_date }}
             </time>
         {% else %}
-            <aside class="actions">
-                <a class="btn btn-secondary" role="button" href="{% url 'post_publish' pk=post.pk %}">Publish</a>
-            </aside>
+            <form action="{% url 'post_publish' pk=post.pk %}" class="actions" method='POST'>
+                {% csrf_token %}
+                <button class="btn btn-secondary" type="submit" role="button">Publish</button>
+            </form>
         {% endif %}
         <h2>{{ post.title }}</h2>
         <p>{{ post.text|linebreaksbr }}</p>
